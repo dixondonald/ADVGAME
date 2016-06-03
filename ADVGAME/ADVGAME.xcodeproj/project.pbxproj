@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8235FBF41D009CA50055ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF31D009CA50055ABE2 /* main.m */; };
+		8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF61D009CA50055ABE2 /* AppDelegate.m */; };
+		8235FBFA1D009CA50055ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF91D009CA50055ABE2 /* ViewController.m */; };
+		8235FBFD1D009CA50055ABE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8235FBFB1D009CA50055ABE2 /* Main.storyboard */; };
+		8235FC001D009CA50055ABE2 /* ADVGAME.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBFE1D009CA50055ABE2 /* ADVGAME.xcdatamodeld */; };
+		8235FC021D009CA50055ABE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8235FC011D009CA50055ABE2 /* Assets.xcassets */; };
+		8235FC051D009CA50055ABE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */; };
+		8235FC101D009CA50055ABE2 /* ADVGAMETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FC0F1D009CA50055ABE2 /* ADVGAMETests.m */; };
+		8235FC1B1D009CA50055ABE2 /* ADVGAMEUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FC1A1D009CA50055ABE2 /* ADVGAMEUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8235FC0C1D009CA50055ABE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8235FBE71D009CA50055ABE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8235FBEE1D009CA50055ABE2;
+			remoteInfo = ADVGAME;
+		};
+		8235FC171D009CA50055ABE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8235FBE71D009CA50055ABE2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8235FBEE1D009CA50055ABE2;
+			remoteInfo = ADVGAME;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8235FBEF1D009CA50055ABE2 /* ADVGAME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADVGAME.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8235FBF31D009CA50055ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8235FBF51D009CA50055ABE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		8235FBF61D009CA50055ABE2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		8235FBF81D009CA50055ABE2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		8235FBF91D009CA50055ABE2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		8235FBFC1D009CA50055ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8235FBFF1D009CA50055ABE2 /* ADVGAME.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ADVGAME.xcdatamodel; sourceTree = "<group>"; };
+		8235FC011D009CA50055ABE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8235FC041D009CA50055ABE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8235FC061D009CA50055ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8235FC0B1D009CA50055ABE2 /* ADVGAMETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ADVGAMETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8235FC0F1D009CA50055ABE2 /* ADVGAMETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADVGAMETests.m; sourceTree = "<group>"; };
+		8235FC111D009CA50055ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8235FC161D009CA50055ABE2 /* ADVGAMEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ADVGAMEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8235FC1A1D009CA50055ABE2 /* ADVGAMEUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADVGAMEUITests.m; sourceTree = "<group>"; };
+		8235FC1C1D009CA50055ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8235FBEC1D009CA50055ABE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC081D009CA50055ABE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC131D009CA50055ABE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8235FBE61D009CA50055ABE2 = {
+			isa = PBXGroup;
+			children = (
+				8235FBF11D009CA50055ABE2 /* ADVGAME */,
+				8235FC0E1D009CA50055ABE2 /* ADVGAMETests */,
+				8235FC191D009CA50055ABE2 /* ADVGAMEUITests */,
+				8235FBF01D009CA50055ABE2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8235FBF01D009CA50055ABE2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8235FBEF1D009CA50055ABE2 /* ADVGAME.app */,
+				8235FC0B1D009CA50055ABE2 /* ADVGAMETests.xctest */,
+				8235FC161D009CA50055ABE2 /* ADVGAMEUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8235FBF11D009CA50055ABE2 /* ADVGAME */ = {
+			isa = PBXGroup;
+			children = (
+				8235FBF51D009CA50055ABE2 /* AppDelegate.h */,
+				8235FBF61D009CA50055ABE2 /* AppDelegate.m */,
+				8235FBF81D009CA50055ABE2 /* ViewController.h */,
+				8235FBF91D009CA50055ABE2 /* ViewController.m */,
+				8235FBFB1D009CA50055ABE2 /* Main.storyboard */,
+				8235FC011D009CA50055ABE2 /* Assets.xcassets */,
+				8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */,
+				8235FC061D009CA50055ABE2 /* Info.plist */,
+				8235FBFE1D009CA50055ABE2 /* ADVGAME.xcdatamodeld */,
+				8235FBF21D009CA50055ABE2 /* Supporting Files */,
+			);
+			path = ADVGAME;
+			sourceTree = "<group>";
+		};
+		8235FBF21D009CA50055ABE2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8235FBF31D009CA50055ABE2 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8235FC0E1D009CA50055ABE2 /* ADVGAMETests */ = {
+			isa = PBXGroup;
+			children = (
+				8235FC0F1D009CA50055ABE2 /* ADVGAMETests.m */,
+				8235FC111D009CA50055ABE2 /* Info.plist */,
+			);
+			path = ADVGAMETests;
+			sourceTree = "<group>";
+		};
+		8235FC191D009CA50055ABE2 /* ADVGAMEUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8235FC1A1D009CA50055ABE2 /* ADVGAMEUITests.m */,
+				8235FC1C1D009CA50055ABE2 /* Info.plist */,
+			);
+			path = ADVGAMEUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8235FBEE1D009CA50055ABE2 /* ADVGAME */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8235FC1F1D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAME" */;
+			buildPhases = (
+				8235FBEB1D009CA50055ABE2 /* Sources */,
+				8235FBEC1D009CA50055ABE2 /* Frameworks */,
+				8235FBED1D009CA50055ABE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ADVGAME;
+			productName = ADVGAME;
+			productReference = 8235FBEF1D009CA50055ABE2 /* ADVGAME.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8235FC0A1D009CA50055ABE2 /* ADVGAMETests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8235FC221D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMETests" */;
+			buildPhases = (
+				8235FC071D009CA50055ABE2 /* Sources */,
+				8235FC081D009CA50055ABE2 /* Frameworks */,
+				8235FC091D009CA50055ABE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8235FC0D1D009CA50055ABE2 /* PBXTargetDependency */,
+			);
+			name = ADVGAMETests;
+			productName = ADVGAMETests;
+			productReference = 8235FC0B1D009CA50055ABE2 /* ADVGAMETests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8235FC151D009CA50055ABE2 /* ADVGAMEUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8235FC251D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMEUITests" */;
+			buildPhases = (
+				8235FC121D009CA50055ABE2 /* Sources */,
+				8235FC131D009CA50055ABE2 /* Frameworks */,
+				8235FC141D009CA50055ABE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8235FC181D009CA50055ABE2 /* PBXTargetDependency */,
+			);
+			name = ADVGAMEUITests;
+			productName = ADVGAMEUITests;
+			productReference = 8235FC161D009CA50055ABE2 /* ADVGAMEUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8235FBE71D009CA50055ABE2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = DonaldDixon;
+				TargetAttributes = {
+					8235FBEE1D009CA50055ABE2 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					8235FC0A1D009CA50055ABE2 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 8235FBEE1D009CA50055ABE2;
+					};
+					8235FC151D009CA50055ABE2 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 8235FBEE1D009CA50055ABE2;
+					};
+				};
+			};
+			buildConfigurationList = 8235FBEA1D009CA50055ABE2 /* Build configuration list for PBXProject "ADVGAME" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8235FBE61D009CA50055ABE2;
+			productRefGroup = 8235FBF01D009CA50055ABE2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8235FBEE1D009CA50055ABE2 /* ADVGAME */,
+				8235FC0A1D009CA50055ABE2 /* ADVGAMETests */,
+				8235FC151D009CA50055ABE2 /* ADVGAMEUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8235FBED1D009CA50055ABE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8235FC051D009CA50055ABE2 /* LaunchScreen.storyboard in Resources */,
+				8235FC021D009CA50055ABE2 /* Assets.xcassets in Resources */,
+				8235FBFD1D009CA50055ABE2 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC091D009CA50055ABE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC141D009CA50055ABE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8235FBEB1D009CA50055ABE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8235FBFA1D009CA50055ABE2 /* ViewController.m in Sources */,
+				8235FC001D009CA50055ABE2 /* ADVGAME.xcdatamodeld in Sources */,
+				8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */,
+				8235FBF41D009CA50055ABE2 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC071D009CA50055ABE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8235FC101D009CA50055ABE2 /* ADVGAMETests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8235FC121D009CA50055ABE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8235FC1B1D009CA50055ABE2 /* ADVGAMEUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8235FC0D1D009CA50055ABE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8235FBEE1D009CA50055ABE2 /* ADVGAME */;
+			targetProxy = 8235FC0C1D009CA50055ABE2 /* PBXContainerItemProxy */;
+		};
+		8235FC181D009CA50055ABE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8235FBEE1D009CA50055ABE2 /* ADVGAME */;
+			targetProxy = 8235FC171D009CA50055ABE2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8235FBFB1D009CA50055ABE2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8235FBFC1D009CA50055ABE2 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8235FC041D009CA50055ABE2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8235FC1D1D009CA50055ABE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8235FC1E1D009CA50055ABE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8235FC201D009CA50055ABE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ADVGAME/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAME;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		8235FC211D009CA50055ABE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ADVGAME/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAME;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		8235FC231D009CA50055ABE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ADVGAMETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ADVGAME.app/ADVGAME";
+			};
+			name = Debug;
+		};
+		8235FC241D009CA50055ABE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ADVGAMETests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMETests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ADVGAME.app/ADVGAME";
+			};
+			name = Release;
+		};
+		8235FC261D009CA50055ABE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ADVGAMEUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMEUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ADVGAME;
+			};
+			name = Debug;
+		};
+		8235FC271D009CA50055ABE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ADVGAMEUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMEUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ADVGAME;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8235FBEA1D009CA50055ABE2 /* Build configuration list for PBXProject "ADVGAME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8235FC1D1D009CA50055ABE2 /* Debug */,
+				8235FC1E1D009CA50055ABE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8235FC1F1D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAME" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8235FC201D009CA50055ABE2 /* Debug */,
+				8235FC211D009CA50055ABE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8235FC221D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMETests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8235FC231D009CA50055ABE2 /* Debug */,
+				8235FC241D009CA50055ABE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		8235FC251D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMEUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8235FC261D009CA50055ABE2 /* Debug */,
+				8235FC271D009CA50055ABE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		8235FBFE1D009CA50055ABE2 /* ADVGAME.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				8235FBFF1D009CA50055ABE2 /* ADVGAME.xcdatamodel */,
+			);
+			currentVersion = 8235FBFF1D009CA50055ABE2 /* ADVGAME.xcdatamodel */;
+			path = ADVGAME.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 8235FBE71D009CA50055ABE2 /* Project object */;
+}
