@@ -14,7 +14,7 @@
 
 
 @property (nonatomic, strong) NSArray *currentArray;
-@property (strong, nonatomic) NSArray *commands;
+@property (strong, nonatomic) NSMutableArray *commands;
 @property (strong, nonatomic) NSMutableArray *investigates;
 
 @property (strong, nonatomic) NSArray *cellImages;
@@ -31,9 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.textView.delegate = self;
-//    self.textView.text = @"You go around to the side of the building.";
-    
     self.investigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
 
     self.imageView = [[UIImageView alloc] init];
@@ -43,11 +40,12 @@
 //    self.imageView.layer.borderWidth = 1;
     [self.view addSubview:self.imageView];
 
+    self.textView.delegate = self;
     self.textView = [[UITextView alloc] init];
     self.textView.frame = CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .2);
 //    self.textView.layer.borderColor = [[UIColor whiteColor] CGColor];
 //    self.textView.layer.borderWidth = 1;
-    self.textView.text = @"You wake in an alley. You do not know where you are or how you got here";
+    self.textView.text = @"You are in an alley";
     self.textView.backgroundColor = [UIColor blackColor];
     self.textView.textColor = [UIColor whiteColor];
     [self.view addSubview:self.textView];
@@ -61,7 +59,7 @@
     self.mainTableView.layer.borderWidth = 1;
 //    [self.view addSubview:self.mainTableView];
     
-    self.commands = [[NSArray alloc] initWithObjects:@"LOOK AROUND", @"CHECK", @"TALK TO", @"INVENTORY", @"MOVE", nil];
+    self.commands = [[NSMutableArray alloc] initWithObjects:@"LOOK AROUND", nil];
     self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
     self.currentArray = self.commands;
 }
@@ -109,7 +107,10 @@
             [self.investigates addObject:@"Grafitti"];
             [self.investigates addObject:@"Cars"];
         }
-
+        if (![self.commands containsObject:@"CHECK"]) {
+            [self.commands addObject:@"CHECK"];
+        }
+        [self.mainTableView reloadData];
 
     } else if ([cellText isEqualToString:@"CHECK"]) {
         self.currentArray = self.investigates;
@@ -117,6 +118,14 @@
     } else if ([cellText isEqualToString:@"<"]) {
         self.currentArray = self.commands;
         [self.mainTableView reloadData];
+    } else if ([cellText isEqualToString:@"Grafitti"]) {
+        self.textView.text = @"There's a hole in the wall near the center of the artwork";
+        if (![self.investigates containsObject:@"Hole"]) {
+            [self.investigates addObject:@"Hole"];
+            [self.mainTableView reloadData];
+        }
+
+        
     }
    
 }
