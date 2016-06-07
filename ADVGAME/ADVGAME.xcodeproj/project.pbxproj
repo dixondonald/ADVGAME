@@ -500,6 +500,7 @@
 				8235FC211D009CA50055ABE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8235FC221D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMETests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +509,7 @@
 				8235FC241D009CA50055ABE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8235FC251D009CA50055ABE2 /* Build configuration list for PBXNativeTarget "ADVGAMEUITests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +518,7 @@
 				8235FC271D009CA50055ABE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

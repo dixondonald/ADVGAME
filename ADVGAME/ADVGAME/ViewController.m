@@ -8,13 +8,21 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+
+
+@property (nonatomic, strong) NSArray *currentArray;
 @property (strong, nonatomic) NSArray *commands;
+@property (strong, nonatomic) NSMutableArray *investigates;
+
 @property (strong, nonatomic) NSArray *cellImages;
-@property (strong, nonatomic) IBOutlet UITextView *textView;
-@property (strong, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic) UITextView *textView;
+@property (strong, nonatomic) UIImageView *imageView;
+
+
+
 
 @end
 
@@ -22,50 +30,72 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.textView.delegate = self;
+//    self.textView.text = @"You go around to the side of the building.";
+    
+    self.investigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
 
-     self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
-//    self.imageView.frame = CGRectMake(self.view.frame.size.width / 2 - self.view.frame.size.height * .2, 0, self.view.frame.size.height * .4, self.view.frame.size.height * .4);
+    self.imageView = [[UIImageView alloc] init];
+    self.imageView.image = [UIImage imageNamed:@"bg1.png"];
+    self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
     self.imageView.layer.borderColor = [[UIColor whiteColor] CGColor];
 //    self.imageView.layer.borderWidth = 1;
+    [self.view addSubview:self.imageView];
 
-    
-    self.textView.frame = CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .15);
-    self.textView.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.textView = [[UITextView alloc] init];
+    self.textView.frame = CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .2);
+//    self.textView.layer.borderColor = [[UIColor whiteColor] CGColor];
 //    self.textView.layer.borderWidth = 1;
+    self.textView.text = @"You wake in an alley. You do not know where you are or how you got here";
+    self.textView.backgroundColor = [UIColor blackColor];
+    self.textView.textColor = [UIColor whiteColor];
+    [self.view addSubview:self.textView];
     
+//    self.mainTableView = [[UITableView alloc] init];
+//    self.mainTableView.delegate = self;
+//    self.mainTableView.dataSource = self;
     self.mainTableView.frame = CGRectMake(0, self.view.frame.size.height * .7, self.view.frame.size.width, self.view.frame.size.height * .3);
     self.mainTableView.rowHeight = self.mainTableView.frame.size.height / 5;
     self.mainTableView.layer.borderColor = [[UIColor blackColor] CGColor];
     self.mainTableView.layer.borderWidth = 1;
+//    [self.view addSubview:self.mainTableView];
     
-    self.commands = [[NSArray alloc] initWithObjects:@"OBSERVE", @"INVESTIGATE", @"QUESTION", @"INVENTORY", @"RELOCATE", nil];
+    self.commands = [[NSArray alloc] initWithObjects:@"LOOK AROUND", @"CHECK", @"TALK TO", @"INVENTORY", @"MOVE", nil];
     self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
-
+    self.currentArray = self.commands;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.commands.count;
+    return self.currentArray.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell =
-    [tableView dequeueReusableCellWithIdentifier:@"cellID"
-                                    forIndexPath:indexPath];
+//    static NSString *CellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
     
-    long row = [indexPath row];
-    cell.textLabel.text = [self.commands objectAtIndex:row];
+    
+    cell.textLabel.text = [self.currentArray objectAtIndex:indexPath.row];
+    
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
 //    cell.textLabel.backgroundColor = [UIColor clearColor];
 
-    
-    UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:row]];
-    image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
-    cell.accessoryView = image;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    if (self.currentArray == self.commands) {
+        UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
+        image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
+        cell.accessoryView = image;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        cell.accessoryView = nil;
+    }
     
     return cell;
 }
@@ -73,7 +103,22 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
-    NSLog(@"%@", cellText);
+    if ([cellText isEqualToString:@"LOOK AROUND"]) {
+        self.textView.text = @"Grafitti covers the walls. You see two cars parked nearby";
+        if (![self.investigates containsObject:@"Grafitti"]) {
+            [self.investigates addObject:@"Grafitti"];
+            [self.investigates addObject:@"Cars"];
+        }
+
+
+    } else if ([cellText isEqualToString:@"CHECK"]) {
+        self.currentArray = self.investigates;
+        [self.mainTableView reloadData];
+    } else if ([cellText isEqualToString:@"<"]) {
+        self.currentArray = self.commands;
+        [self.mainTableView reloadData];
+    }
+   
 }
 
 
