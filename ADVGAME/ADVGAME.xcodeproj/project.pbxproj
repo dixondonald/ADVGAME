@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8233EE301D086CFD0093F4FB /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE2F1D086CFD0093F4FB /* GlobalData.m */; };
 		8235FBF41D009CA50055ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF31D009CA50055ABE2 /* main.m */; };
 		8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF61D009CA50055ABE2 /* AppDelegate.m */; };
 		8235FBFA1D009CA50055ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF91D009CA50055ABE2 /* ViewController.m */; };
@@ -36,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8233EE2E1D086CFD0093F4FB /* GlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalData.h; sourceTree = "<group>"; };
+		8233EE2F1D086CFD0093F4FB /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
 		8235FBEF1D009CA50055ABE2 /* ADVGAME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADVGAME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8235FBF31D009CA50055ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8235FBF51D009CA50055ABE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				8235FBF61D009CA50055ABE2 /* AppDelegate.m */,
 				8235FBF81D009CA50055ABE2 /* ViewController.h */,
 				8235FBF91D009CA50055ABE2 /* ViewController.m */,
+				8233EE2E1D086CFD0093F4FB /* GlobalData.h */,
+				8233EE2F1D086CFD0093F4FB /* GlobalData.m */,
 				8235FBFB1D009CA50055ABE2 /* Main.storyboard */,
 				8235FC011D009CA50055ABE2 /* Assets.xcassets */,
 				8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */,
@@ -276,6 +281,7 @@
 				8235FBFA1D009CA50055ABE2 /* ViewController.m in Sources */,
 				8235FC001D009CA50055ABE2 /* ADVGAME.xcdatamodeld in Sources */,
 				8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */,
+				8233EE301D086CFD0093F4FB /* GlobalData.m in Sources */,
 				8235FBF41D009CA50055ABE2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
