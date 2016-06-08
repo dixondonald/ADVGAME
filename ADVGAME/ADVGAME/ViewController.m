@@ -61,10 +61,8 @@
         self.candyBarActions = [[NSMutableArray alloc] initWithObjects:@"<", @"Inspect Candybar", @"Eat Candybar", @"Give Candybar to Vagrant", nil];
     }
     
-    self.imageView = [[UIImageView alloc] init];
-    self.imageView.image = [UIImage imageNamed:@"alley.png"];
+    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alley.png"]];
     self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
-
     [self.view addSubview:self.imageView];
 
     self.textView.delegate = self;
@@ -95,12 +93,12 @@
     
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
-
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     if (self.currentArray == self.commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
         cell.accessoryView = image;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     } else {
         cell.accessoryView = nil;
     }
@@ -197,7 +195,11 @@
     }
     if ([cellText isEqualToString:@"Vagrant >"]) {
         if (self.vagrantIsAwake == YES) {
-            self.textView.text = @"\"Where'd you come from? Got anything to eat?\"";
+            if (self.vagrantHasEaten == NO) {
+                self.textView.text = @"\"Where'd you come from? Got anything to eat?\"";
+            } else {
+                self.textView.text = @"\"Hello, again.\"";
+            }
             self.currentArray = self.vagrantTalks;
             if (![self.commands containsObject:@"INVENTORY"]) {
                 [self.commands addObject:@"INVENTORY"];
@@ -211,13 +213,17 @@
         }
     }
     if ([cellText isEqualToString:@"About Door"]) {
-        self.textView.text = @"\"They only open that door when it's time to take out the trash. They don't like people like us goin' in there.\"";
+        self.textView.text = @"\"They only open that door when it's time to take out the trash. They don't like people like us goin' in there anyhow.\"";
     }
     if ([cellText isEqualToString:@"About Window"]) {
         if (self.vagrantHasEaten == NO) {
             self.textView.text = @"\"I guess you could climb inside through there, but you'd never reach it by yourself, heh.\"";
         } else {
-            self.textView.text = @"\"I guess I can help up through that window, just let me know when you're ready, son.\"";
+            self.textView.text = @"\"I guess I can help up through that window, just let me know when you're ready.\"";
+            self.currentArray = self.commands;
+            [self.mainTableView reloadData];
+            [self checkForScrolling];
+
             if (![self.commands containsObject:@"MOVE"]) {
                 [self.commands addObject:@"MOVE"];
                 [self.mainTableView reloadData];
@@ -254,7 +260,7 @@
         
     }
     if ([cellText isEqualToString:@"Eat Candybar"]) {
-        self.textView.text = @"This is a meal hardly fit for a beggar.";
+        self.textView.text = @"This is a meal that would be hardly fit for a beggar.";
         
     }
     if ([cellText isEqualToString:@"Give Candybar to Vagrant"]) {
