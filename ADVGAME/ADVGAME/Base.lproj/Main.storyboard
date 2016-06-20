@@ -8,7 +8,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="flipHorizontal" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -40,11 +40,55 @@
                     </view>
                     <connections>
                         <outlet property="mainTableView" destination="4Yy-aX-3Kc" id="DZf-17-b9W"/>
+                        <segue destination="ab2-fs-8Vx" kind="modal" identifier="barViewSegue" id="xm8-Bi-zSP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.40000000000001" y="296.77999999999997"/>
+        </scene>
+        <!--Bar View Controller-->
+        <scene sceneID="mbg-gE-5gs">
+            <objects>
+                <viewController modalTransitionStyle="flipHorizontal" id="ab2-fs-8Vx" customClass="BarViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Fk6-X2-Tn4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fOs-MM-9kc">
+                                <rect key="frame" x="0.0" y="466" width="400" height="334"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="cellID" id="Thp-zA-l2n">
+                                        <rect key="frame" x="0.0" y="28" width="400" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Thp-zA-l2n" id="bwL-GA-ZBL">
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ab2-fs-8Vx" id="HpX-P5-w3z"/>
+                                    <outlet property="delegate" destination="ab2-fs-8Vx" id="Sqo-fZ-NpC"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ZVc-4A-CWE"/>
+                    <connections>
+                        <outlet property="mainTableView" destination="fOs-MM-9kc" id="Yin-cJ-DMT"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="alleyViewSegue" id="K00-18-ZyE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bsb-e3-p5a" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="520" y="296"/>
         </scene>
     </scenes>
 </document>

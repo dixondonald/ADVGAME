@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "BarViewController.h"
 #import "GlobalData.h"
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
@@ -41,19 +42,15 @@
         self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
         self.currentArray = self.commands;
     }
-    
     if (!self.investigates) {
         self.investigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
     }
-    
     if (!self.talks) {
         self.talks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
     }
-    
     if (!self.vagrantTalks) {
         self.vagrantTalks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
     }
-    
     if (!self.moves) {
         self.moves = [[NSMutableArray alloc] initWithObjects:@"<", nil];
     }
@@ -67,7 +64,9 @@
 
     self.textView.delegate = self;
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .2)];
+    
     self.textView.text = @"You wake in an alley. You don't know where you are or how you got here.";
+    self.textView.text = self.startingText;
     self.textView.backgroundColor = [UIColor blackColor];
     self.textView.textColor = [UIColor whiteColor];
     [self.textView setFont:[UIFont systemFontOfSize:15]];
@@ -87,14 +86,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
-    
-    
     cell.textLabel.text = [self.currentArray objectAtIndex:indexPath.row];
-    
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     if (self.currentArray == self.commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
@@ -102,7 +97,6 @@
     } else {
         cell.accessoryView = nil;
     }
-    
     return cell;
 }
 
@@ -277,13 +271,24 @@
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Climb through Window"]) {
-        self.textView.text = @"You get a boost from the old man and enter the building.";
-        //segue goes here
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"barViewSegue" sender:self];
+        });
     }
-    
-    
    
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"barViewSegue"]) {
+        NSLog(@"segue");
+        BarViewController *barVC =
+        [segue destinationViewController];
+        barVC.barStartingText = @"The old man boosts you up and you crawl through the window.";
+    }
+}
+
 
 - (void) checkForScrolling {
     if (self.mainTableView.contentSize.height < self.mainTableView.frame.size.height) {
