@@ -11,7 +11,7 @@
 
 @implementation GlobalData
 
-@synthesize startingText ,inventory, currentArray, commands, alleyInvestigates, alleyTalks, vagrantTalks, alleyMoves, candyBarActions, crowbarActions ,vagrantIsAwake, vagrantIsGone, vagrantHasEaten, fenceIsOpen, barInvestigates, barTalks, bartenderTalks, barMoves, walletActions, tabIsKnown, backDoorIsUnlocked, restroomIsUnlocked, restroomInvestigates, restroomTalks, restroomMoves, bugSprayActions, bugSprayIsTaken;
+@synthesize startingText ,inventory, currentArray, commands, alleyInvestigates, alleyTalks, vagrantTalks, alleyMoves, candyBarActions, crowbarActions ,vagrantIsAwake, vagrantIsGone, vagrantHasEaten, fenceIsOpen, barInvestigates, barTalks, bartenderTalks, barMoves, walletActions, tabIsKnown, tabIsPaid, backDoorIsUnlocked, restroomIsUnlocked, restroomInvestigates, restroomTalks, restroomMoves, bugSprayActions, bugSprayIsTaken, streetInvestigates, streetTalks, streetMoves, cabIsHere;
 +(GlobalData *)globalData {
     static dispatch_once_t pred;
     static GlobalData *shared = nil;
@@ -39,6 +39,7 @@
         shared.barMoves= [[NSMutableArray alloc] initWithObjects:@"<", nil];
         shared.walletActions = [[NSMutableArray alloc] initWithObjects:@"<", @"Pay Tab", nil];
         shared.tabIsKnown = NO;
+        shared.tabIsPaid = NO;
         shared.backDoorIsUnlocked = NO;
         shared.restroomIsUnlocked = NO;
         
@@ -47,6 +48,11 @@
         shared.restroomMoves = [[NSMutableArray alloc] initWithObjects:@"<", @"Back to Bar", nil];
         shared.bugSprayActions = [[NSMutableArray alloc] initWithObjects:@"<", @"Use Bug Spray on Vagrant", nil];
         shared.bugSprayIsTaken = NO;
+        
+        shared.streetInvestigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
+        shared.streetTalks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
+        shared.streetMoves = [[NSMutableArray alloc] initWithObjects:@"<", @"Back inside Bar", nil];
+        shared.cabIsHere = NO;
 
 
 

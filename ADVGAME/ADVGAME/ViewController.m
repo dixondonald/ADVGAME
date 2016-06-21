@@ -78,30 +78,34 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
-        self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you. Is it morning?";
-        if (![[GlobalData globalData].alleyInvestigates containsObject:@"Door"]) {
-            [[GlobalData globalData].alleyInvestigates addObject:@"Door"];
-            [[GlobalData globalData].alleyInvestigates addObject:@"Fence"];
-            [[GlobalData globalData].alleyInvestigates addObject:@"Vagrant"];
-            [[GlobalData globalData].alleyInvestigates addObject:@"Dumpster"];
-            if (![[GlobalData globalData].alleyTalks containsObject:@"Vagrant >"]) {
-                [[GlobalData globalData].alleyTalks addObject:@"Vagrant >"];
+        if ([GlobalData globalData].vagrantIsGone == NO) {
+            self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you. Is it morning?";
+            if (![[GlobalData globalData].alleyInvestigates containsObject:@"Door"]) {
+                [[GlobalData globalData].alleyInvestigates addObject:@"Door"];
+                [[GlobalData globalData].alleyInvestigates addObject:@"Fence"];
+                [[GlobalData globalData].alleyInvestigates addObject:@"Vagrant"];
+                [[GlobalData globalData].alleyInvestigates addObject:@"Dumpster"];
+                if (![[GlobalData globalData].alleyTalks containsObject:@"Vagrant >"]) {
+                    [[GlobalData globalData].alleyTalks addObject:@"Vagrant >"];
+                }
             }
-        }
-        if (![[GlobalData globalData].commands containsObject:@"CHECK"]) {
-            [[GlobalData globalData].commands addObject:@"CHECK"];
-        }
-        if (![[GlobalData globalData].commands containsObject:@"TALK"]) {
-            [[GlobalData globalData].commands addObject:@"TALK"];
-        }
-        if (![[GlobalData globalData].vagrantTalks containsObject:@"About Door"]) {
-            [[GlobalData globalData].vagrantTalks addObject:@"About Door"];
-            [[GlobalData globalData].vagrantTalks addObject:@"About Fence"];
-            [[GlobalData globalData].vagrantTalks addObject:@"About Himself"];
-            [[GlobalData globalData].vagrantTalks addObject:@"About Dumpster"];
-        }
-        if (![[GlobalData globalData].bartenderTalks containsObject:@"About Vagrant"]) {
-            [[GlobalData globalData].bartenderTalks addObject:@"About Vagrant"];
+            if (![[GlobalData globalData].commands containsObject:@"CHECK"]) {
+                [[GlobalData globalData].commands addObject:@"CHECK"];
+            }
+            if (![[GlobalData globalData].commands containsObject:@"TALK"]) {
+                [[GlobalData globalData].commands addObject:@"TALK"];
+            }
+            if (![[GlobalData globalData].vagrantTalks containsObject:@"About Door"]) {
+                [[GlobalData globalData].vagrantTalks addObject:@"About Door"];
+                [[GlobalData globalData].vagrantTalks addObject:@"About Fence"];
+                [[GlobalData globalData].vagrantTalks addObject:@"About Himself"];
+                [[GlobalData globalData].vagrantTalks addObject:@"About Dumpster"];
+            }
+            if (![[GlobalData globalData].bartenderTalks containsObject:@"About Vagrant"]) {
+                [[GlobalData globalData].bartenderTalks addObject:@"About Vagrant"];
+            }
+        } else {
+             self.textView.text = @"The vagrant is gone. It's just you and the dumpster.";
         }
 
         [self.mainTableView reloadData];
@@ -277,17 +281,18 @@
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         [self.mainTableView reloadData];
         [self checkForScrolling];
-        [[GlobalData globalData].inventory removeObject:@"Candybar"];
+        [[GlobalData globalData].inventory removeObject:@"Candybar >"];
     }
     if ([cellText isEqualToString:@"Bug Spray >"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].bugSprayActions;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
-    if ([cellText isEqualToString:@"Use Bug Spray On Vagrant"]) {
+    if ([cellText isEqualToString:@"Use Bug Spray on Vagrant"]) {
         [GlobalData globalData].vagrantIsGone = YES;
         [[GlobalData globalData].alleyInvestigates removeObject:@"Vagrant"];
         [[GlobalData globalData].alleyTalks removeObject:@"Vagrant >"];
+        [[GlobalData globalData].inventory removeObject:@"Bug Spray >"];
 
         self.textView.text = @"The old man screams like a banshee and vanishes through the back door into the bar.";
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
@@ -295,18 +300,24 @@
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Crowbar >"]) {
-        [GlobalData globalData].currentArray = [GlobalData globalData].crowbarActions;
+        if ([GlobalData globalData].fenceIsOpen == NO) {
+            [GlobalData globalData].currentArray = [GlobalData globalData].crowbarActions;
+        } else {
+            self.textView.text = @"You already opened the fence.";
+        }
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Use Crowbar on Fence"]) {
         [GlobalData globalData].fenceIsOpen = YES;
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
+        [[GlobalData globalData].crowbarActions removeObject:@"Use Crowbar on Fence"];
         self.textView.text = @"The lock easily falls off when you apply the crowbar to it.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Wallet >"]) {
-        self.textView.text = @"Best to keep it your pocket incase that bum shows back up.";
+        self.textView.text = @"Best to keep it your pocket in case that bum shows back up.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }

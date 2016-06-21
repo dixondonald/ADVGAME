@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSMutableArray *barMoves;
 @property (nonatomic, retain) NSMutableArray *walletActions;
 @property (nonatomic) BOOL tabIsKnown;
+@property (nonatomic) BOOL tabIsPaid;
 @property (nonatomic) BOOL backDoorIsUnlocked;
 @property (nonatomic) BOOL restroomIsUnlocked;
 
@@ -41,6 +42,12 @@
 @property (nonatomic, retain) NSMutableArray *restroomMoves;
 @property (nonatomic, retain) NSMutableArray *bugSprayActions;
 @property (nonatomic) BOOL bugSprayIsTaken;
+
+@property (nonatomic, retain) NSMutableArray *streetInvestigates;
+@property (nonatomic, retain) NSMutableArray *streetTalks;
+@property (nonatomic, retain) NSMutableArray *streetMoves;
+@property (nonatomic) BOOL cabIsHere;
+
 
 
 

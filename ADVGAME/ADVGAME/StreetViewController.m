@@ -76,22 +76,30 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
-        self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. ";
-        if (![[GlobalData globalData].barMoves containsObject:@"Front Door"]) {
-            [[GlobalData globalData].barMoves addObject:@"Front Door"];
-            [[GlobalData globalData].barMoves addObject:@"Back Door"];
-            [[GlobalData globalData].barMoves addObject:@"Restroom"];
+        if ([GlobalData globalData].cabIsHere == NO) {
+            self.textView.text = @"You are outside of the bar, on the street. There's noone around. You see a sign for cab company on a street pole.";
+            if (![[GlobalData globalData].streetInvestigates containsObject:@"Cab Sign"]) {
+                [[GlobalData globalData].streetInvestigates addObject:@"Cab Sign"];
+            }
+            if (![[GlobalData globalData].bartenderTalks containsObject:@"About Cab Sign"]) {
+                [[GlobalData globalData].bartenderTalks addObject:@"About Cab Sign"];
+            }
+        } else {
+            self.textView.text = @"The cab has just pulled up.";
+            if (![[GlobalData globalData].streetMoves containsObject:@"Get into Cab"]) {
+                [[GlobalData globalData].streetMoves addObject:@"Get into Cab"];
+            }
         }
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"CHECK"]) {
-        [GlobalData globalData].currentArray = [GlobalData globalData].barInvestigates;
+        [GlobalData globalData].currentArray = [GlobalData globalData].streetInvestigates;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"TALK"]) {
-        [GlobalData globalData].currentArray = [GlobalData globalData].barTalks;
+        [GlobalData globalData].currentArray = [GlobalData globalData].streetTalks;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
@@ -101,17 +109,49 @@
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"MOVE"]) {
-        [GlobalData globalData].currentArray = [GlobalData globalData].barMoves;
+        [GlobalData globalData].currentArray = [GlobalData globalData].streetMoves;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"<"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
-        self.textView.text = @"You are in the bar.";
+        self.textView.text = @"You are out front of the bar.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
-    if ([cellText isEqualToString:@"Back Door"]) {
+    if ([cellText isEqualToString:@"Cab Sign"]) {
+        self.textView.text = @"It's not much more than a picture of cab, but there aren't any around right now.";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Get into Cab"]) {
+        self.textView.text = @"You climb into the cab and tell the driver where you live. You made it!";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    
+    if ([cellText isEqualToString:@"Bug Spray >"]) {
+        self.textView.text = @"There's nothing to use it on in here.";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Crowbar >"]) {
+        self.textView.text = @"There's nothing to do with it in here.";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Wallet >"]) {
+        if ([GlobalData globalData].tabIsKnown == NO) {
+            self.textView.text = @"There's no reason to take it out right now.";
+        } else {
+            [GlobalData globalData].currentArray = [GlobalData globalData].walletActions;
+        }
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+
+
+    if ([cellText isEqualToString:@"Back inside Bar"]) {
         [GlobalData globalData].backDoorIsUnlocked = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"streetBarViewSegue" sender:self];

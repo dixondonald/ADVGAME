@@ -115,7 +115,7 @@
     }
     if ([cellText isEqualToString:@"<"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
-        self.textView.text = @"You are in the restroom.";
+        self.textView.text = @"You are in the bar.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
@@ -153,6 +153,18 @@
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
+    if ([cellText isEqualToString:@"About Cab Sign"]) {
+        if ([GlobalData globalData].tabIsPaid == NO) {
+            self.textView.text = @"\"I could call you a cab, but you never paid your tab last night.\"";
+            [GlobalData globalData].tabIsKnown = YES;
+        } else {
+        self.textView.text = @"\"I'll call you cab. Go home and get sleep.\"";
+        [GlobalData globalData].cabIsHere = YES;
+        }
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+
     if ([cellText isEqualToString:@"Bug Spray >"]) {
         self.textView.text = @"There's nothing to use it on in here.";
         [self.mainTableView reloadData];
@@ -169,6 +181,13 @@
         } else {
             [GlobalData globalData].currentArray = [GlobalData globalData].walletActions;
         }
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Pay Tab"]) {
+        self.textView.text = @"\"Well, I guess miracles do happen.\".";
+        [GlobalData globalData].tabIsPaid = YES;
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }

@@ -106,7 +106,7 @@
     }
     if ([cellText isEqualToString:@"<"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
-        self.textView.text = @"You are in the bar.";
+        self.textView.text = @"You are in the restroom.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
