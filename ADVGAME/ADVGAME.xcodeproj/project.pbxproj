@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8233EE301D086CFD0093F4FB /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE2F1D086CFD0093F4FB /* GlobalData.m */; };
 		8233EE331D08ECE60093F4FB /* BarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE321D08ECE60093F4FB /* BarViewController.m */; };
+		8233EE3F1D199ED40093F4FB /* StreetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE3E1D199ED40093F4FB /* StreetViewController.m */; };
+		8233EE421D19A0090093F4FB /* RestRoomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE411D19A0090093F4FB /* RestRoomViewController.m */; };
 		8235FBF41D009CA50055ABE2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF31D009CA50055ABE2 /* main.m */; };
 		8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF61D009CA50055ABE2 /* AppDelegate.m */; };
 		8235FBFA1D009CA50055ABE2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FBF91D009CA50055ABE2 /* ViewController.m */; };
@@ -42,6 +44,10 @@
 		8233EE2F1D086CFD0093F4FB /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
 		8233EE311D08ECE60093F4FB /* BarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarViewController.h; sourceTree = "<group>"; };
 		8233EE321D08ECE60093F4FB /* BarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarViewController.m; sourceTree = "<group>"; };
+		8233EE3D1D199ED40093F4FB /* StreetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreetViewController.h; sourceTree = "<group>"; };
+		8233EE3E1D199ED40093F4FB /* StreetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreetViewController.m; sourceTree = "<group>"; };
+		8233EE401D19A0090093F4FB /* RestRoomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestRoomViewController.h; sourceTree = "<group>"; };
+		8233EE411D19A0090093F4FB /* RestRoomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestRoomViewController.m; sourceTree = "<group>"; };
 		8235FBEF1D009CA50055ABE2 /* ADVGAME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADVGAME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8235FBF31D009CA50055ABE2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8235FBF51D009CA50055ABE2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -115,6 +121,10 @@
 				8235FBF91D009CA50055ABE2 /* ViewController.m */,
 				8233EE311D08ECE60093F4FB /* BarViewController.h */,
 				8233EE321D08ECE60093F4FB /* BarViewController.m */,
+				8233EE3D1D199ED40093F4FB /* StreetViewController.h */,
+				8233EE3E1D199ED40093F4FB /* StreetViewController.m */,
+				8233EE401D19A0090093F4FB /* RestRoomViewController.h */,
+				8233EE411D19A0090093F4FB /* RestRoomViewController.m */,
 				8233EE2E1D086CFD0093F4FB /* GlobalData.h */,
 				8233EE2F1D086CFD0093F4FB /* GlobalData.m */,
 				8235FBFB1D009CA50055ABE2 /* Main.storyboard */,
@@ -288,7 +298,9 @@
 				8235FBF71D009CA50055ABE2 /* AppDelegate.m in Sources */,
 				8233EE301D086CFD0093F4FB /* GlobalData.m in Sources */,
 				8233EE331D08ECE60093F4FB /* BarViewController.m in Sources */,
+				8233EE421D19A0090093F4FB /* RestRoomViewController.m in Sources */,
 				8235FBF41D009CA50055ABE2 /* main.m in Sources */,
+				8233EE3F1D199ED40093F4FB /* StreetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

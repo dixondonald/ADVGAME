@@ -7,14 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "BarViewController.h"
 #import "GlobalData.h"
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
-
-
-@property (strong, nonatomic) NSMutableArray *candyBarActions;
 
 @property (strong, nonatomic) NSArray *cellImages;
 @property (strong, nonatomic) UITextView *textView;
@@ -82,12 +78,15 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
-        self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you.";
+        self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you. Is it morning?";
         if (![[GlobalData globalData].alleyInvestigates containsObject:@"Door"]) {
             [[GlobalData globalData].alleyInvestigates addObject:@"Door"];
             [[GlobalData globalData].alleyInvestigates addObject:@"Fence"];
             [[GlobalData globalData].alleyInvestigates addObject:@"Vagrant"];
             [[GlobalData globalData].alleyInvestigates addObject:@"Dumpster"];
+            if (![[GlobalData globalData].alleyTalks containsObject:@"Vagrant >"]) {
+                [[GlobalData globalData].alleyTalks addObject:@"Vagrant >"];
+            }
         }
         if (![[GlobalData globalData].commands containsObject:@"CHECK"]) {
             [[GlobalData globalData].commands addObject:@"CHECK"];
@@ -95,14 +94,14 @@
         if (![[GlobalData globalData].commands containsObject:@"TALK"]) {
             [[GlobalData globalData].commands addObject:@"TALK"];
         }
-        if (![[GlobalData globalData].alleyTalks containsObject:@"Vagrant >"]) {
-            [[GlobalData globalData].alleyTalks addObject:@"Vagrant >"];
-        }
         if (![[GlobalData globalData].vagrantTalks containsObject:@"About Door"]) {
             [[GlobalData globalData].vagrantTalks addObject:@"About Door"];
             [[GlobalData globalData].vagrantTalks addObject:@"About Fence"];
             [[GlobalData globalData].vagrantTalks addObject:@"About Himself"];
             [[GlobalData globalData].vagrantTalks addObject:@"About Dumpster"];
+        }
+        if (![[GlobalData globalData].bartenderTalks containsObject:@"About Vagrant"]) {
+            [[GlobalData globalData].bartenderTalks addObject:@"About Vagrant"];
         }
 
         [self.mainTableView reloadData];
@@ -138,7 +137,16 @@
         }
     }
     if ([cellText isEqualToString:@"Fence"]) {
-        self.textView.text = @"A large chain with a padlock prevents you from opening it, and barbed wire lines the top. You can see something small on the ground just past the fence.";
+        if ([GlobalData globalData].fenceIsOpen == NO) {
+            self.textView.text = @"A large chain with a padlock prevents you from opening it, and barbed wire lines the top. It looks like a wallet is on the other side on the ground.";
+            if (![[GlobalData globalData].alleyInvestigates containsObject:@"Wallet"]) {
+                [[GlobalData globalData].alleyInvestigates addObject:@"Wallet"];
+                [self.mainTableView reloadData];
+                [self checkForScrolling];
+            }
+        } else {
+            self.textView.text = @"You broke the lock and the fence is now open.";
+        }
     }
     if ([cellText isEqualToString:@"Vagrant"]) {
         if ([GlobalData globalData].vagrantIsAwake == NO) {
@@ -156,9 +164,24 @@
             } else {
                 self.textView.text = @"\"I won't tell you twice, son.\"";
             }
-            
+        } else {
+            self.textView.text = @"With the vagrant gone, you rummage through the dumpster. You find a crowbar below a load of garbage and you take it.";
+            [[GlobalData globalData].alleyInvestigates removeObject:@"Dumpster"];
+            [[GlobalData globalData].inventory addObject:@"Crowbar >"];
         }
-    
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Wallet"]) {
+        if ([GlobalData globalData].fenceIsOpen == NO) {
+            self.textView.text = @"You can't get to it.";
+            } else {
+            self.textView.text = @"Hey, this is your wallet! It looks like everything is still there.";
+            [[GlobalData globalData].alleyInvestigates removeObject:@"Wallet"];
+            [[GlobalData globalData].inventory addObject:@"Wallet >"];
+        }
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Window"]) {
         if ([GlobalData globalData].backDoorIsUnlocked == YES) {
@@ -235,7 +258,7 @@
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
-    if ([cellText isEqualToString:@"Candybar"]) {
+    if ([cellText isEqualToString:@"Candybar >"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].candyBarActions;
         [self.mainTableView reloadData];
         [self checkForScrolling];
@@ -256,6 +279,39 @@
         [self checkForScrolling];
         [[GlobalData globalData].inventory removeObject:@"Candybar"];
     }
+    if ([cellText isEqualToString:@"Bug Spray >"]) {
+        [GlobalData globalData].currentArray = [GlobalData globalData].bugSprayActions;
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Use Bug Spray On Vagrant"]) {
+        [GlobalData globalData].vagrantIsGone = YES;
+        [[GlobalData globalData].alleyInvestigates removeObject:@"Vagrant"];
+        [[GlobalData globalData].alleyTalks removeObject:@"Vagrant >"];
+
+        self.textView.text = @"The old man screams like a banshee and vanishes through the back door into the bar.";
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Crowbar >"]) {
+        [GlobalData globalData].currentArray = [GlobalData globalData].crowbarActions;
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Use Crowbar on Fence"]) {
+        [GlobalData globalData].fenceIsOpen = YES;
+        self.textView.text = @"The lock easily falls off when you apply the crowbar to it.";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+    if ([cellText isEqualToString:@"Wallet >"]) {
+        self.textView.text = @"Best to keep it your pocket incase that bum shows back up.";
+        [self.mainTableView reloadData];
+        [self checkForScrolling];
+    }
+
+
     if ([cellText isEqualToString:@"MOVE"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].alleyMoves;
         [self.mainTableView reloadData];
