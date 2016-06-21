@@ -9,6 +9,5 @@
 #import "ViewController.h"
 
 @interface BarViewController : ViewController
-@property (strong, nonatomic) NSString *barStartingText;
 
 @end

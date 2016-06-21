@@ -14,20 +14,12 @@
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
 
-@property (nonatomic, strong) NSArray *currentArray;
-@property (strong, nonatomic) NSMutableArray *commands;
-@property (strong, nonatomic) NSMutableArray *investigates;
-@property (strong, nonatomic) NSMutableArray *talks;
-@property (strong, nonatomic) NSMutableArray *vagrantTalks;
 @property (strong, nonatomic) NSMutableArray *candyBarActions;
-@property (strong, nonatomic) NSMutableArray *moves;
 
 @property (strong, nonatomic) NSArray *cellImages;
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *imageView;
-@property BOOL vagrantIsAwake;
-@property BOOL vagrantIsGone;
-@property BOOL vagrantHasEaten;
+
 
 
 @end
@@ -37,27 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (!self.commands) {
-        self.commands = [[NSMutableArray alloc] initWithObjects:@"LOOK AROUND", nil];
-        self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
-        self.currentArray = self.commands;
-    }
-    if (!self.investigates) {
-        self.investigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.talks) {
-        self.talks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.vagrantTalks) {
-        self.vagrantTalks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.moves) {
-        self.moves = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.candyBarActions) {
-        self.candyBarActions = [[NSMutableArray alloc] initWithObjects:@"<", @"Inspect Candybar", @"Eat Candybar", @"Give Candybar to Vagrant", nil];
-    }
     
+    if (!self.cellImages) {
+        self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
+    }
+    [GlobalData globalData].currentArray = [GlobalData globalData].commands;
+    
+   
     self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alley.png"]];
     self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
     [self.view addSubview:self.imageView];
@@ -65,8 +43,8 @@
     self.textView.delegate = self;
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .2)];
     
-    self.textView.text = @"You wake in an alley. You don't know where you are or how you got here.";
-    self.textView.text = self.startingText;
+    self.textView.text = [GlobalData globalData].startingText;
+    
     self.textView.backgroundColor = [UIColor blackColor];
     self.textView.textColor = [UIColor whiteColor];
     [self.textView setFont:[UIFont systemFontOfSize:15]];
@@ -80,17 +58,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.currentArray.count;
+    return [GlobalData globalData].currentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
-    cell.textLabel.text = [self.currentArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[GlobalData globalData].currentArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.currentArray == self.commands) {
+    if ([GlobalData globalData].currentArray == [GlobalData globalData].commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
         cell.accessoryView = image;
@@ -105,26 +83,26 @@
     NSString *cellText = cell.textLabel.text;
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you.";
-        if (![self.investigates containsObject:@"Door"]) {
-            [self.investigates addObject:@"Door"];
-            [self.investigates addObject:@"Fence"];
-            [self.investigates addObject:@"Vagrant"];
-            [self.investigates addObject:@"Dumpster"];
+        if (![[GlobalData globalData].alleyInvestigates containsObject:@"Door"]) {
+            [[GlobalData globalData].alleyInvestigates addObject:@"Door"];
+            [[GlobalData globalData].alleyInvestigates addObject:@"Fence"];
+            [[GlobalData globalData].alleyInvestigates addObject:@"Vagrant"];
+            [[GlobalData globalData].alleyInvestigates addObject:@"Dumpster"];
         }
-        if (![self.commands containsObject:@"CHECK"]) {
-            [self.commands addObject:@"CHECK"];
+        if (![[GlobalData globalData].commands containsObject:@"CHECK"]) {
+            [[GlobalData globalData].commands addObject:@"CHECK"];
         }
-        if (![self.commands containsObject:@"TALK"]) {
-            [self.commands addObject:@"TALK"];
+        if (![[GlobalData globalData].commands containsObject:@"TALK"]) {
+            [[GlobalData globalData].commands addObject:@"TALK"];
         }
-        if (![self.talks containsObject:@"Vagrant >"]) {
-            [self.talks addObject:@"Vagrant >"];
+        if (![[GlobalData globalData].alleyTalks containsObject:@"Vagrant >"]) {
+            [[GlobalData globalData].alleyTalks addObject:@"Vagrant >"];
         }
-        if (![self.vagrantTalks containsObject:@"About Door"]) {
-            [self.vagrantTalks addObject:@"About Door"];
-            [self.vagrantTalks addObject:@"About Fence"];
-            [self.vagrantTalks addObject:@"About Himself"];
-            [self.vagrantTalks addObject:@"About Dumpster"];
+        if (![[GlobalData globalData].vagrantTalks containsObject:@"About Door"]) {
+            [[GlobalData globalData].vagrantTalks addObject:@"About Door"];
+            [[GlobalData globalData].vagrantTalks addObject:@"About Fence"];
+            [[GlobalData globalData].vagrantTalks addObject:@"About Himself"];
+            [[GlobalData globalData].vagrantTalks addObject:@"About Dumpster"];
         }
 
         [self.mainTableView reloadData];
@@ -132,34 +110,38 @@
         
     }
     if ([cellText isEqualToString:@"CHECK"]) {
-        self.currentArray = self.investigates;
+        [GlobalData globalData].currentArray = [GlobalData globalData].alleyInvestigates;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"<"]) {
-        self.currentArray = self.commands;
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
           self.textView.text = @"You are in the alley.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Door"]) {
-        self.textView.text = @"It's locked. There's a small window above it.";
-        if (![self.investigates containsObject:@"Window"]) {
-            [self.investigates addObject:@"Window"];
-            [self.mainTableView reloadData];
-            [self checkForScrolling];
-        }
-        if (![self.vagrantTalks containsObject:@"About Window"]) {
-            [self.vagrantTalks addObject:@"About Window"];
-            [self.mainTableView reloadData];
-            [self checkForScrolling];
+        if ([GlobalData globalData].backDoorIsUnlocked == YES) {
+            self.textView.text = @"You unlocked it from inside.";
+        } else {
+            self.textView.text = @"It's locked. There's a small window above it.";
+            if (![[GlobalData globalData].alleyInvestigates containsObject:@"Window"]) {
+                [[GlobalData globalData].alleyInvestigates addObject:@"Window"];
+                [self.mainTableView reloadData];
+                [self checkForScrolling];
+            }
+            if (![[GlobalData globalData].vagrantTalks containsObject:@"About Window"]) {
+                [[GlobalData globalData].vagrantTalks addObject:@"About Window"];
+                [self.mainTableView reloadData];
+                [self checkForScrolling];
+            }
         }
     }
     if ([cellText isEqualToString:@"Fence"]) {
         self.textView.text = @"A large chain with a padlock prevents you from opening it, and barbed wire lines the top. You can see something small on the ground just past the fence.";
     }
     if ([cellText isEqualToString:@"Vagrant"]) {
-        if (self.vagrantIsAwake == NO) {
+        if ([GlobalData globalData].vagrantIsAwake == NO) {
             self.textView.text = @"He's out cold. You nudge him with your foot to no avail.";
         }
         else {
@@ -167,9 +149,9 @@
         }
     }
     if ([cellText isEqualToString:@"Dumpster"]) {
-        if (self.vagrantIsGone == NO) {
-            if (self.vagrantIsAwake == NO) {
-                self.vagrantIsAwake = YES;
+        if ([GlobalData globalData].vagrantIsGone == NO) {
+            if ([GlobalData globalData].vagrantIsAwake == NO) {
+                [GlobalData globalData].vagrantIsAwake = YES;
                 self.textView.text = @"You start to open the dumpster, but before you can get a look inside, the smelly vagrant wakes up. \"This is my dumpster! Back off!\"";
             } else {
                 self.textView.text = @"\"I won't tell you twice, son.\"";
@@ -179,24 +161,27 @@
     
     }
     if ([cellText isEqualToString:@"Window"]) {
-        self.textView.text = @"It looks big enough to fit through, but it's too high for you to reach.";
-        
+        if ([GlobalData globalData].backDoorIsUnlocked == YES) {
+            self.textView.text = @"You climbed through it once already.";
+        } else {
+            self.textView.text = @"It looks big enough to fit through, but it's too high for you to reach.";
+        }
     }
     if ([cellText isEqualToString:@"TALK"]) {
-        self.currentArray = self.talks;
+        [GlobalData globalData].currentArray = [GlobalData globalData].alleyTalks;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Vagrant >"]) {
-        if (self.vagrantIsAwake == YES) {
-            if (self.vagrantHasEaten == NO) {
+        if ([GlobalData globalData].vagrantIsAwake == YES) {
+            if ([GlobalData globalData].vagrantHasEaten == NO) {
                 self.textView.text = @"\"Where'd you come from? Got anything to eat?\"";
             } else {
                 self.textView.text = @"\"Hello, again.\"";
             }
-            self.currentArray = self.vagrantTalks;
-            if (![self.commands containsObject:@"INVENTORY"]) {
-                [self.commands addObject:@"INVENTORY"];
+            [GlobalData globalData].currentArray = [GlobalData globalData].vagrantTalks;
+            if (![[GlobalData globalData].commands containsObject:@"INVENTORY"]) {
+                [[GlobalData globalData].commands addObject:@"INVENTORY"];
                 [self.mainTableView reloadData];
                 [self checkForScrolling];
             }
@@ -207,24 +192,30 @@
         }
     }
     if ([cellText isEqualToString:@"About Door"]) {
-        self.textView.text = @"\"They only open that door when it's time to take out the trash. They don't like people like us goin' in there anyhow.\"";
+        if ([GlobalData globalData].backDoorIsUnlocked == YES) {
+            self.textView.text = @"\"You got it open, so what. I ain't leavin this spot.\"";
+        } else {
+            self.textView.text = @"\"They only open that door when it's time to take out the trash. They don't like people like us goin' in there anyhow.\"";
+        }
     }
     if ([cellText isEqualToString:@"About Window"]) {
-        if (self.vagrantHasEaten == NO) {
+        if ([GlobalData globalData].backDoorIsUnlocked == YES) {
+            self.textView.text = @"\"Pulled my groin when I helped you up there.\"";
+        } else if ([GlobalData globalData].vagrantHasEaten == NO) {
             self.textView.text = @"\"I guess you could climb inside through there, but you'd never reach it by yourself, heh.\"";
         } else {
             self.textView.text = @"\"I guess I can help up through that window, just let me know when you're ready.\"";
-            self.currentArray = self.commands;
+            [GlobalData globalData].currentArray = [GlobalData globalData].commands;
             [self.mainTableView reloadData];
             [self checkForScrolling];
 
-            if (![self.commands containsObject:@"MOVE"]) {
-                [self.commands addObject:@"MOVE"];
+            if (![[GlobalData globalData].commands containsObject:@"MOVE"]) {
+                [[GlobalData globalData].commands addObject:@"MOVE"];
                 [self.mainTableView reloadData];
                 [self checkForScrolling];
             }
-            if (![self.moves containsObject:@"Climb through Window"]) {
-                [self.moves addObject:@"Climb through Window"];
+            if (![[GlobalData globalData].alleyMoves containsObject:@"Climb through Window"]) {
+                [[GlobalData globalData].alleyMoves addObject:@"Climb through Window"];
                 [self.mainTableView reloadData];
                 [self checkForScrolling];
             }
@@ -240,12 +231,12 @@
         self.textView.text = @"\"Hands off, if you wanna keep your fingers.\"";
     }
     if ([cellText isEqualToString:@"INVENTORY"]) {
-        self.currentArray = [GlobalData globalData].inventory;
+        [GlobalData globalData].currentArray = [GlobalData globalData].inventory;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Candybar"]) {
-        self.currentArray = self.candyBarActions;
+        [GlobalData globalData].currentArray = [GlobalData globalData].candyBarActions;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
@@ -258,34 +249,41 @@
         
     }
     if ([cellText isEqualToString:@"Give Candybar to Vagrant"]) {
-        self.vagrantHasEaten = YES;
+        [GlobalData globalData].vagrantHasEaten = YES;
         self.textView.text = @"The man happily devours the squishy glob of chocolate.";
-        self.currentArray = self.commands;
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         [self.mainTableView reloadData];
         [self checkForScrolling];
         [[GlobalData globalData].inventory removeObject:@"Candybar"];
     }
     if ([cellText isEqualToString:@"MOVE"]) {
-        self.currentArray = self.moves;
+        [GlobalData globalData].currentArray = [GlobalData globalData].alleyMoves;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Climb through Window"]) {
-        
+        [[GlobalData globalData].alleyMoves removeObject:@"Climb through Window"];
+        [[GlobalData globalData].alleyMoves addObject:@"Back Door"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"barViewSegue" sender:self];
         });
     }
-   
+    if ([cellText isEqualToString:@"Back Door"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self performSegueWithIdentifier:@"barViewSegue" sender:self];
+        });
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"barViewSegue"]) {
-        NSLog(@"segue");
-        BarViewController *barVC =
         [segue destinationViewController];
-        barVC.barStartingText = @"The old man boosts you up and you crawl through the window.";
+        if ([GlobalData globalData].backDoorIsUnlocked == NO) {
+            [GlobalData globalData].startingText = @"The old man boosts you up and you crawl through the window.";
+        } else {
+        [GlobalData globalData].startingText = @"You go back into the bar.";
+        }
     }
 }
 

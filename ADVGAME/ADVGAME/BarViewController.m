@@ -12,11 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 
-@property (nonatomic, strong) NSArray *currentArray;
-@property (strong, nonatomic) NSMutableArray *barcommands;
-@property (strong, nonatomic) NSMutableArray *investigates;
-@property (strong, nonatomic) NSMutableArray *talks;
-@property (strong, nonatomic) NSMutableArray *moves;
 
 @property (strong, nonatomic) NSArray *cellImages;
 @property (strong, nonatomic) UITextView *textView;
@@ -30,19 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if (!self.barcommands) {
-        self.barcommands = [[NSMutableArray alloc] initWithObjects:@"LOOK AROUND", @"CHECK", @"TALK", @"INVENTORY", @"MOVE", nil];
+    if (![GlobalData globalData].commands) {
+        [GlobalData globalData].commands = [[NSMutableArray alloc] initWithObjects:@"LOOK AROUND", @"CHECK", @"TALK", @"INVENTORY", @"MOVE", nil];
         self.cellImages = [[NSArray alloc] initWithObjects:[UIImage imageNamed:@"eye.png"], [UIImage imageNamed:@"magnifier.png"], [UIImage imageNamed:@"mouth.png"],  [UIImage imageNamed:@"briefcase.png"], [UIImage imageNamed:@"arrows.png"],nil];
-        self.currentArray = self.barcommands;
-    }
-    if (!self.investigates) {
-        self.investigates = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.talks) {
-        self.talks = [[NSMutableArray alloc] initWithObjects:@"<", nil];
-    }
-    if (!self.moves) {
-        self.moves = [[NSMutableArray alloc] initWithObjects:@"<", nil];
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
     }
     
     self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inside.png"]];
@@ -51,7 +37,9 @@
     
     self.textView.delegate = self;
     self.textView = [[UITextView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height * .5, self.view.frame.size.width, self.view.frame.size.height * .2)];
-    self.textView.text = self.startingText;
+    
+    self.textView.text = [GlobalData globalData].startingText;
+    
     self.textView.backgroundColor = [UIColor blackColor];
     self.textView.textColor = [UIColor whiteColor];
     [self.textView setFont:[UIFont systemFontOfSize:15]];
@@ -66,17 +54,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.currentArray.count;
+    return [GlobalData globalData].currentArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
-    cell.textLabel.text = [self.currentArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[GlobalData globalData].currentArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.currentArray == self.barcommands) {
+    if ([GlobalData globalData].currentArray == [GlobalData globalData].commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
         cell.accessoryView = image;
@@ -91,42 +79,42 @@
     NSString *cellText = cell.textLabel.text;
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. ";
-        if (![self.moves containsObject:@"Front Door"]) {
-            [self.moves addObject:@"Front Door"];
-            [self.moves addObject:@"Back Door"];
-            [self.moves addObject:@"Restroom"];
+        if (![[GlobalData globalData].barMoves containsObject:@"Front Door"]) {
+            [[GlobalData globalData].barMoves addObject:@"Front Door"];
+            [[GlobalData globalData].barMoves addObject:@"Back Door"];
+            [[GlobalData globalData].barMoves addObject:@"Restroom"];
         }
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"CHECK"]) {
-        self.currentArray = self.investigates;
+        [GlobalData globalData].currentArray = [GlobalData globalData].barInvestigates;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"TALK"]) {
-        self.currentArray = self.talks;
+        [GlobalData globalData].currentArray = [GlobalData globalData].barTalks;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"INVENTORY"]) {
-        self.currentArray = [GlobalData globalData].inventory;
+        [GlobalData globalData].currentArray = [GlobalData globalData].inventory;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"MOVE"]) {
-        self.currentArray = self.moves;
+        [GlobalData globalData].currentArray = [GlobalData globalData].barMoves;
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"<"]) {
-        self.currentArray = self.barcommands;
+        [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         self.textView.text = @"You are in the bar.";
         [self.mainTableView reloadData];
         [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Back Door"]) {
-        
+        [GlobalData globalData].backDoorIsUnlocked = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"alleyViewSegue" sender:self];
         });
@@ -138,10 +126,8 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"alleyViewSegue"]) {
-        NSLog(@"segue");
-        ViewController *alleyVC =
         [segue destinationViewController];
-        alleyVC.startingText = @"You go through the back door into the alley, making sure it's unlocked.";
+        [GlobalData globalData].startingText = @"You go through the back door into the alley, making sure it's unlocked.";
     }
 }
 
