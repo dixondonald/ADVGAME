@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "GlobalData.h"
+#import <AVFoundation/AVFoundation.h>
+
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
@@ -16,6 +18,8 @@
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *imageView;
 
+@property(nonatomic, strong) AVAudioPlayer *clickSound;
+@property (nonatomic, strong) NSURL *clickFile;
 
 
 @end
@@ -32,7 +36,7 @@
     [GlobalData globalData].currentArray = [GlobalData globalData].commands;
     
    
-    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alley.png"]];
+    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"alley.jpg"]];
     self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
     [self.view addSubview:self.imageView];
 
@@ -50,6 +54,14 @@
     
     self.mainTableView.frame = CGRectMake(0, self.view.frame.size.height * .7, self.view.frame.size.width, self.view.frame.size.height * .3);
     self.mainTableView.rowHeight = self.mainTableView.frame.size.height / 5.5;
+    
+    self.clickFile = [[NSBundle mainBundle] URLForResource:@"click"
+                                             withExtension:@"mp3"];
+    self.clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.clickFile
+                                                           error:nil];
+    self.clickSound.volume = .5;
+    self.clickSound.numberOfLoops = 0;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -77,6 +89,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
+    [self.clickSound play];
+
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         if ([GlobalData globalData].vagrantIsGone == NO) {
             self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you. Is it morning?";

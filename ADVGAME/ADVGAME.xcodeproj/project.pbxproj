@@ -20,6 +20,7 @@
 		8235FC051D009CA50055ABE2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */; };
 		8235FC101D009CA50055ABE2 /* ADVGAMETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FC0F1D009CA50055ABE2 /* ADVGAMETests.m */; };
 		8235FC1B1D009CA50055ABE2 /* ADVGAMEUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8235FC1A1D009CA50055ABE2 /* ADVGAMEUITests.m */; };
+		82F332F31D35579900A22610 /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 82F332F21D35579900A22610 /* click.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		8235FC161D009CA50055ABE2 /* ADVGAMEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ADVGAMEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8235FC1A1D009CA50055ABE2 /* ADVGAMEUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ADVGAMEUITests.m; sourceTree = "<group>"; };
 		8235FC1C1D009CA50055ABE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82F332F21D35579900A22610 /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = click.mp3; path = ../../../../Documents/click.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				8233EE411D19A0090093F4FB /* RestRoomViewController.m */,
 				8233EE2E1D086CFD0093F4FB /* GlobalData.h */,
 				8233EE2F1D086CFD0093F4FB /* GlobalData.m */,
+				82F332F21D35579900A22610 /* click.mp3 */,
 				8235FBFB1D009CA50055ABE2 /* Main.storyboard */,
 				8235FC011D009CA50055ABE2 /* Assets.xcassets */,
 				8235FC031D009CA50055ABE2 /* LaunchScreen.storyboard */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8235FC051D009CA50055ABE2 /* LaunchScreen.storyboard in Resources */,
+				82F332F31D35579900A22610 /* click.mp3 in Resources */,
 				8235FC021D009CA50055ABE2 /* Assets.xcassets in Resources */,
 				8235FBFD1D009CA50055ABE2 /* Main.storyboard in Resources */,
 			);
@@ -486,6 +490,7 @@
 		8235FC261D009CA50055ABE2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
 				INFOPLIST_FILE = ADVGAMEUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMEUITests;
@@ -497,6 +502,7 @@
 		8235FC271D009CA50055ABE2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
 				INFOPLIST_FILE = ADVGAMEUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.donalddixon.ADVGAMEUITests;

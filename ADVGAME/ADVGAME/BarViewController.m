@@ -30,7 +30,7 @@
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
     }
     
-    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inside.png"]];
+    self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"inside.jpg"]];
     self.imageView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height * .5);
     [self.view addSubview:self.imageView];
     
