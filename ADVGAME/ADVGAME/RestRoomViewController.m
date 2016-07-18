@@ -8,6 +8,8 @@
 
 #import "RestRoomViewController.h"
 #import "GlobalData.h"
+#import <AVFoundation/AVFoundation.h>
+
 @interface RestRoomViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
@@ -15,6 +17,12 @@
 @property (strong, nonatomic) NSArray *cellImages;
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *imageView;
+
+@property(nonatomic, strong) AVAudioPlayer *clickSound;
+@property (nonatomic, strong) NSURL *clickFile;
+
+@property(nonatomic, strong) AVAudioPlayer *bgSound;
+@property (nonatomic, strong) NSURL *bgFile;
 
 @end
 
@@ -48,6 +56,22 @@
     self.mainTableView.frame = CGRectMake(0, self.view.frame.size.height * .7, self.view.frame.size.width, self.view.frame.size.height * .3);
     self.mainTableView.rowHeight = self.mainTableView.frame.size.height / 5.5;
     
+    self.clickFile = [[NSBundle mainBundle] URLForResource:@"click"
+                                             withExtension:@"mp3"];
+    self.clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.clickFile
+                                                             error:nil];
+    self.clickSound.volume = .5;
+    self.clickSound.numberOfLoops = 0;
+    
+    self.bgFile = [[NSBundle mainBundle] URLForResource:@"rrSound"
+                                          withExtension:@"m4a"];
+    self.bgSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.bgFile
+                                                          error:nil];
+    self.bgSound.volume = .5;
+    self.bgSound.numberOfLoops = -1;
+    [self.bgSound play];
+
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -75,6 +99,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
+    [self.clickSound play];
+
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"It's a dirty bathroom. Not much in here besides a toilet and a sink";
         if (![[GlobalData globalData].restroomInvestigates containsObject:@"Toilet"]) {
@@ -174,6 +200,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self.bgSound stop];
+
     if ([segue.identifier isEqualToString:@"restroomBarViewSegue"]) {
         [segue destinationViewController];
         [GlobalData globalData].startingText = @"You leave the restroom and head back into the bar.";

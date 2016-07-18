@@ -21,6 +21,10 @@
 @property(nonatomic, strong) AVAudioPlayer *clickSound;
 @property (nonatomic, strong) NSURL *clickFile;
 
+@property(nonatomic, strong) AVAudioPlayer *bgSound;
+@property (nonatomic, strong) NSURL *bgFile;
+
+
 
 @end
 
@@ -61,6 +65,15 @@
                                                            error:nil];
     self.clickSound.volume = .5;
     self.clickSound.numberOfLoops = 0;
+
+    self.bgFile = [[NSBundle mainBundle] URLForResource:@"alleySound"
+                                             withExtension:@"m4a"];
+    self.bgSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.bgFile
+                                                             error:nil];
+    self.bgSound.volume = .5;
+    self.bgSound.numberOfLoops = -1;
+    [self.bgSound play];
+
 
 }
 
@@ -163,7 +176,12 @@
                 [self checkForScrolling];
             }
         } else {
-            self.textView.text = @"You broke the lock and the fence is now open.";
+            self.textView.text = @"You broke the lock and the fence is now open. There's a wallet on the ground a few feet past the gate.";
+            if (![[GlobalData globalData].alleyInvestigates containsObject:@"Wallet"]) {
+                [[GlobalData globalData].alleyInvestigates addObject:@"Wallet"];
+                [self.mainTableView reloadData];
+                [self checkForScrolling];
+            }
         }
     }
     if ([cellText isEqualToString:@"Vagrant"]) {
@@ -358,6 +376,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self.bgSound stop];
+
     if ([segue.identifier isEqualToString:@"barViewSegue"]) {
         [segue destinationViewController];
         if ([GlobalData globalData].backDoorIsUnlocked == NO) {

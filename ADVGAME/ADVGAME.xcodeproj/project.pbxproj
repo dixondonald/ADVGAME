@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		822BCA951D3571D900C55609 /* alleySound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822BCA931D3571D900C55609 /* alleySound.m4a */; };
+		822BCA961D3571D900C55609 /* streetSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822BCA941D3571D900C55609 /* streetSound.m4a */; };
+		822BCA981D36C57100C55609 /* rrSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822BCA971D36C57100C55609 /* rrSound.m4a */; };
+		822BCA9A1D36CBC100C55609 /* barSound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 822BCA991D36CBC100C55609 /* barSound.m4a */; };
 		8233EE301D086CFD0093F4FB /* GlobalData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE2F1D086CFD0093F4FB /* GlobalData.m */; };
 		8233EE331D08ECE60093F4FB /* BarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE321D08ECE60093F4FB /* BarViewController.m */; };
 		8233EE3F1D199ED40093F4FB /* StreetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8233EE3E1D199ED40093F4FB /* StreetViewController.m */; };
@@ -41,6 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		822BCA931D3571D900C55609 /* alleySound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = alleySound.m4a; path = ../../../../Documents/alleySound.m4a; sourceTree = "<group>"; };
+		822BCA941D3571D900C55609 /* streetSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = streetSound.m4a; path = ../../../../Documents/streetSound.m4a; sourceTree = "<group>"; };
+		822BCA971D36C57100C55609 /* rrSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = rrSound.m4a; path = ../../../../Documents/rrSound.m4a; sourceTree = "<group>"; };
+		822BCA991D36CBC100C55609 /* barSound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = barSound.m4a; path = ../../../../Documents/barSound.m4a; sourceTree = "<group>"; };
 		8233EE2E1D086CFD0093F4FB /* GlobalData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalData.h; sourceTree = "<group>"; };
 		8233EE2F1D086CFD0093F4FB /* GlobalData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalData.m; sourceTree = "<group>"; };
 		8233EE311D08ECE60093F4FB /* BarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarViewController.h; sourceTree = "<group>"; };
@@ -129,6 +137,10 @@
 				8233EE411D19A0090093F4FB /* RestRoomViewController.m */,
 				8233EE2E1D086CFD0093F4FB /* GlobalData.h */,
 				8233EE2F1D086CFD0093F4FB /* GlobalData.m */,
+				822BCA931D3571D900C55609 /* alleySound.m4a */,
+				822BCA991D36CBC100C55609 /* barSound.m4a */,
+				822BCA971D36C57100C55609 /* rrSound.m4a */,
+				822BCA941D3571D900C55609 /* streetSound.m4a */,
 				82F332F21D35579900A22610 /* click.mp3 */,
 				8235FBFB1D009CA50055ABE2 /* Main.storyboard */,
 				8235FC011D009CA50055ABE2 /* Assets.xcassets */,
@@ -270,7 +282,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8235FC051D009CA50055ABE2 /* LaunchScreen.storyboard in Resources */,
+				822BCA981D36C57100C55609 /* rrSound.m4a in Resources */,
+				822BCA9A1D36CBC100C55609 /* barSound.m4a in Resources */,
 				82F332F31D35579900A22610 /* click.mp3 in Resources */,
+				822BCA951D3571D900C55609 /* alleySound.m4a in Resources */,
+				822BCA961D3571D900C55609 /* streetSound.m4a in Resources */,
 				8235FC021D009CA50055ABE2 /* Assets.xcassets in Resources */,
 				8235FBFD1D009CA50055ABE2 /* Main.storyboard in Resources */,
 			);

@@ -8,6 +8,8 @@
 
 #import "BarViewController.h"
 #import "GlobalData.h"
+#import <AVFoundation/AVFoundation.h>
+
 @interface BarViewController () <UITableViewDelegate, UITableViewDataSource, UITextViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
@@ -16,6 +18,11 @@
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *imageView;
 
+@property(nonatomic, strong) AVAudioPlayer *clickSound;
+@property (nonatomic, strong) NSURL *clickFile;
+
+@property(nonatomic, strong) AVAudioPlayer *bgSound;
+@property (nonatomic, strong) NSURL *bgFile;
 
 @end
 
@@ -49,6 +56,21 @@
     self.mainTableView.frame = CGRectMake(0, self.view.frame.size.height * .7, self.view.frame.size.width, self.view.frame.size.height * .3);
     self.mainTableView.rowHeight = self.mainTableView.frame.size.height / 5.5;
 
+    self.clickFile = [[NSBundle mainBundle] URLForResource:@"click"
+                                             withExtension:@"mp3"];
+    self.clickSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.clickFile
+                                                             error:nil];
+    self.clickSound.volume = .5;
+    self.clickSound.numberOfLoops = 0;
+    
+    self.bgFile = [[NSBundle mainBundle] URLForResource:@"barSound"
+                                          withExtension:@"m4a"];
+    self.bgSound = [[AVAudioPlayer alloc] initWithContentsOfURL:self.bgFile
+                                                          error:nil];
+    self.bgSound.volume = .5;
+    self.bgSound.numberOfLoops = -1;
+    [self.bgSound play];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -76,8 +98,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
+    [self.clickSound play];
+
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
-        self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. The bartender has his back turned. There's noone else is the bar.";
+        self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. The bartender is cleaning glasses. There's noone else is the bar.";
         if (![[GlobalData globalData].barInvestigates containsObject:@"Bartender"]) {
             [[GlobalData globalData].barInvestigates addObject:@"Bartender"];
         }
@@ -222,6 +246,8 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    [self.bgSound stop];
+
     if ([segue.identifier isEqualToString:@"alleyViewSegue"]) {
         [segue destinationViewController];
         [GlobalData globalData].startingText = @"You go through the back door into the alley, making sure it's unlocked.";
