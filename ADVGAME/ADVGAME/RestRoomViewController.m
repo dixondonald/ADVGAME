@@ -100,8 +100,6 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
-    [self.mainTableView reloadData];
-    [self checkForScrolling];
     
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"It's a dirty bathroom. Not much in here besides a toilet and a sink";
@@ -168,6 +166,8 @@
             [self performSegueWithIdentifier:@"restroomBarViewSegue" sender:self];
         });
     }
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
 }
 
 

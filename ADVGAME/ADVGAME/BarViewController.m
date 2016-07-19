@@ -99,8 +99,6 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
-    [self.mainTableView reloadData];
-    [self checkForScrolling];
 
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. The bartender is cleaning glasses. There's noone else is the bar.";
@@ -207,6 +205,8 @@
             });
         }
     }
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
 }
 
 

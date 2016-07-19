@@ -100,9 +100,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
-    [self.mainTableView reloadData];
-    [self checkForScrolling];
-
+    
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         if ([GlobalData globalData].cabIsHere == NO) {
             self.textView.text = @"You are outside of the bar, on the street. There's noone around. You see a sign for cab company on a street pole.";
@@ -160,6 +158,8 @@
             [self performSegueWithIdentifier:@"streetBarViewSegue" sender:self];
         });
     }
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
 }
 
 

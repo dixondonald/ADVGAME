@@ -103,9 +103,7 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
-    [self.mainTableView reloadData];
-    [self checkForScrolling];
-
+    
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         if ([GlobalData globalData].vagrantIsGone == NO) {
             self.textView.text = @"There is a door on one end of the alley and a fence on the other. A vagrant lies sleeping next to a dumpster just a few feet from you. Is it morning?";
@@ -326,6 +324,8 @@
             [self performSegueWithIdentifier:@"barViewSegue" sender:self];
         });
     }
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
