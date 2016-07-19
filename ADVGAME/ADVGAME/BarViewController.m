@@ -84,7 +84,7 @@
     cell.textLabel.text = [[GlobalData globalData].currentArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([GlobalData globalData].currentArray == [GlobalData globalData].commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
@@ -99,6 +99,8 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
 
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"You are standing in a bar. There's a front door, a back door, and a restroom. The bartender is cleaning glasses. There's noone else is the bar.";
@@ -113,40 +115,25 @@
             [[GlobalData globalData].barMoves addObject:@"Back Door"];
             [[GlobalData globalData].barMoves addObject:@"Restroom"];
         }
-
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"CHECK"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].barInvestigates;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"TALK"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].barTalks;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"INVENTORY"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].inventory;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"MOVE"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].barMoves;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"<"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         self.textView.text = @"You are in the bar.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Bartender"]) {
         self.textView.text = @"He's a big guy. He seems vaguely familiar.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Bartender >"]) {
         self.textView.text = @"\"Hey, pal, didn't see you come in. You feelin' okay today? You got pretty hammered last night. You should be home sleeping.\"";
@@ -154,19 +141,13 @@
             [[GlobalData globalData].bartenderTalks addObject:@"About Last Night"];
         }
         [GlobalData globalData].currentArray = [GlobalData globalData].bartenderTalks;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"About Restroom"]) {
         self.textView.text = @"\"Oh yeah, you gotta jiggle the handle to get it open.\"";
         [GlobalData globalData].restroomIsUnlocked = YES;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"About Last Night"]) {
         self.textView.text = @"\"You were drinking a lot, buddy. Something about your girlfriend I think. The next thing I knew, you were gone.\"";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"About Vagrant"]) {
         if ([GlobalData globalData].vagrantIsGone == NO) {
@@ -174,8 +155,6 @@
         } else {
             self.textView.text = @"\"He just came running through here. What did you do to him?\"";
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"About Cab Sign"]) {
         if ([GlobalData globalData].tabIsPaid == NO) {
@@ -185,19 +164,13 @@
         self.textView.text = @"\"I'll call you cab. Go home and get sleep.\"";
         [GlobalData globalData].cabIsHere = YES;
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
 
     if ([cellText isEqualToString:@"Bug Spray >"]) {
         self.textView.text = @"There's nothing to use it on in here.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Crowbar >"]) {
         self.textView.text = @"There's nothing to do with it in here.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Wallet >"]) {
         if ([GlobalData globalData].tabIsKnown == NO) {
@@ -205,17 +178,12 @@
         } else {
             [GlobalData globalData].currentArray = [GlobalData globalData].walletActions;
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Pay Tab"]) {
         self.textView.text = @"\"Well, I guess miracles do happen.\".";
         [GlobalData globalData].tabIsPaid = YES;
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
-
     if ([cellText isEqualToString:@"Back Door"]) {
         [GlobalData globalData].backDoorIsUnlocked = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -239,8 +207,6 @@
             });
         }
     }
-
-    
 }
 
 

@@ -85,7 +85,7 @@
     cell.textLabel.text = [[GlobalData globalData].currentArray objectAtIndex:indexPath.row];
     cell.backgroundColor = [UIColor blackColor];
     cell.textLabel.textColor = [UIColor whiteColor];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([GlobalData globalData].currentArray == [GlobalData globalData].commands) {
         UIImageView *image = [[UIImageView alloc] initWithImage:[self.cellImages objectAtIndex:indexPath.row]];
         image.frame = CGRectMake(0, 0, self.mainTableView.rowHeight * .75, self.mainTableView.rowHeight * .75);
@@ -100,54 +100,40 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     NSString *cellText = cell.textLabel.text;
     [self.clickSound play];
-
+    [self.mainTableView reloadData];
+    [self checkForScrolling];
+    
     if ([cellText isEqualToString:@"LOOK AROUND"]) {
         self.textView.text = @"It's a dirty bathroom. Not much in here besides a toilet and a sink";
         if (![[GlobalData globalData].restroomInvestigates containsObject:@"Toilet"]) {
             [[GlobalData globalData].restroomInvestigates addObject:@"Toilet"];
             [[GlobalData globalData].restroomInvestigates addObject:@"Sink"];
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"CHECK"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].restroomInvestigates;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"TALK"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].restroomTalks;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"INVENTORY"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].inventory;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"MOVE"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].restroomMoves;
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"<"]) {
         [GlobalData globalData].currentArray = [GlobalData globalData].commands;
         self.textView.text = @"You are in the restroom.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Toilet"]) {
         self.textView.text = @"Yuck. You feel lucky that you don't have to go right now.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Sink"]) {
         self.textView.text = @"It's filthy. There's a cabinet underneath.";
         if (![[GlobalData globalData].restroomInvestigates containsObject:@"Cabinet"]) {
             [[GlobalData globalData].restroomInvestigates addObject:@"Cabinet"];
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Cabinet"]) {
         if ([GlobalData globalData].bugSprayIsTaken == NO) {
@@ -158,8 +144,6 @@
         } else {
             self.textView.text = @"It's empty.";
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Bug Spray"]) {
         self.textView.text = @"Hmm. This might come in handy. You take it.";
@@ -168,33 +152,22 @@
             [[GlobalData globalData].inventory addObject:@"Bug Spray >"];
             [[GlobalData globalData].restroomInvestigates removeObject:@"Bug Spray"];
         }
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Bug Spray >"]) {
         self.textView.text = @"There's nothing to use it on in here.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Crowbar >"]) {
         self.textView.text = @"There's nothing to do with it in here.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
     if ([cellText isEqualToString:@"Wallet >"]) {
         self.textView.text = @"No reason to take it out here.";
-        [self.mainTableView reloadData];
-        [self checkForScrolling];
     }
-
-
     if ([cellText isEqualToString:@"Back to Bar"]) {
         [GlobalData globalData].backDoorIsUnlocked = YES;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self performSegueWithIdentifier:@"restroomBarViewSegue" sender:self];
         });
     }
-    
 }
 
 
